@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+    "name": "Lambda Task",
+    "version": "0.1",
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "persistent": true
+    },
+    "permissions": [
+        "storage"
+    ],
+    "commands": {
+        "toggle-feature-foo": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+Y",
+                "mac": "Command+Shift+Y"
+            },
+            "description": "Toggle feature foo"
+        }
+    }
+}
