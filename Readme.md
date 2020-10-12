@@ -1,3 +1,7 @@
+## Deploying the API
+  - Run `yarn install`
+  - Run `sls deploy` with AWS credentials/profile set in the environment for the target account
+
 ## Installing Chrome extension
 
 - Navigate to `chrome://extensions` in your Chrome/Chromium based browser
