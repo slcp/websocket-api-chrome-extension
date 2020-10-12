@@ -2,43 +2,27 @@ chrome.commands.onCommand.addListener(function (command) {
   alert(`${JSON.stringify(command)}`);
 });
 
-function saveConnectionId(id) {
-  chrome.storage.local.set({ lambdaTaskCrxConnectionId: id });
-}
-
-function loadConnectionId(callback) {
-  chrome.storage.local.get(
-    "lambdaTaskCrxConnectionId",
-    (items) => callback(items[0].lambdaTaskCrxConnectionId)
-  );
-}
-
 const endpoint = "wss://mudkgw5pwb.execute-api.eu-west-2.amazonaws.com/dev";
 var ws;
 try {
   ws = new WebSocket(endpoint);
 } catch (e) {
-  console.log("helloe");
-  console.log(e);
+  console.log(`Websocket connection failed with error: ${e}`);
 }
 
 ws.onopen = () => {
-  ws.send(
-    JSON.stringify({
-      action: "customaction",
-      data: {
-        hello: "world",
-      },
-    })
-  );
-  console.log("connected");
+  console.log("Websocket successfully opened");
 };
-ws.onmessage = function (data) {
-  console.log(`From server: ${JSON.stringify(data.data)}`);
-  // alert connectionId when received from the server
-  alert(`You've recieved a message: ${JSON.stringify(data.data)}`);
+ws.onmessage = function (event) {
+  console.log(`Message recieve: ${JSON.stringify(event)}`);
+  const message = JSON.parse(event.data)
+  if (message.connectionId) {
+    alert(`Your connection ID is:\n${message.connectionId}`);
+    return
+  }
+  alert(`You've recieved a message: ${JSON.parse(event.data).message}`);  
 };
 ws.onclose = () => {
-  console.log("disconnected");
+  console.log("Websocket connection was closed");
   process.exit();
 };
