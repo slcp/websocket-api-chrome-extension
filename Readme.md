@@ -18,3 +18,6 @@
 - Make a `POST` request to `[api url]/send/[connectionId]
   - The request should have a body that looks like `{"message": "your message goes here"}`
   - API url will be the API Gateway endpoint (including stage) in the `serverless` output once deployed
+
+
+- temp api url - https://co8yicznh2.execute-api.eu-west-2.amazonaws.com/dev/
