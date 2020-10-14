@@ -5,5 +5,8 @@ run-dynamodb:
 build:
 	sh ./build.sh
 
+deploy: build
+	sls deploy -s dev
+
 deploy-local: build
 	AWS_PROFILE=personal sls deploy -s dev
